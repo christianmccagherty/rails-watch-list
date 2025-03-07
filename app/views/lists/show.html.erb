@@ -1,22 +1,23 @@
 <h1><%= @list.name %></h1>
 
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li>
-      <ul>
-        <li><%= bookmark.movie.title %></li>
-        <li><%= bookmark.movie.overview %></li>
-        <li><%= bookmark.movie.rating %></li>
-        <li><%= bookmark.comment %></li>
-        <li><%= link_to "Delete bookmark", bookmark_path(bookmark),
-        data: {
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?"
-        } %></li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+
+<% @bookmarks.each do |bookmark| %>
+  <div class="card-bookmark">
+    <img src="<%= bookmark.movie.poster_url %>" alt="movie poster" />
+    <div class="card-bookmark-infos">
+      <h2><%= bookmark.movie.title %></h2>
+      <p><%= bookmark.movie.rating %>/10</p>
+      <p><%= bookmark.movie.overview %></p>
+      <p>"<%= bookmark.comment %>"</p>
+      <div><%= link_to "Delete bookmark", bookmark_path(bookmark),
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          } %></div>
+    </div>
+  </div>
+<% end %>
+
 
 <h3>Add a new bookmark:</h3>
 <%= simple_form_for [@list, @bookmark] do |f| %>
