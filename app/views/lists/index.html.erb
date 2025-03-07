@@ -1,0 +1,15 @@
+<%# show all lists %>
+<h1>MOVIE LISTS</h1>
+
+<% @lists.each do |list| %>
+  <div class="card-list" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+    <%= link_to list.name, list_path(list) %>
+  </div>
+  <p><%= link_to "Delete list", list_path(list),
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure you want to delete the list and associated bookmarks?"
+            } %></p>
+<% end %>
+
+<%= link_to "Add new list", new_list_path %>
